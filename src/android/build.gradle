@@ -1,0 +1,19 @@
+repositories {
+    jcenter()
+}
+
+android {
+    defaultConfig{
+        manifestPlaceholders = [
+            JSHARE_PKGNAME : privateHelpers.extractStringFromManifest("package"),
+            JPUSH_APPKEY : cdvHelpers.getConfigPreference ('JPUSH_APPKEY', ""),
+            JPUSH_CHANNEL : cdvHelpers.getConfigPreference ('JPUSH_CHANNEL', "developer-default"),
+            //TENCENT_APPID : cdvHelpers.getConfigPreference ('QQ_APPID', ""),
+            //FACEBOOK_APPID : cdvHelpers.getConfigPreference ('FACEBOOK_APPID', "")
+        ]
+    }
+}
+
+dependencies {
+    compile 'cn.jiguang.sdk:jshare:1.6.0'
+}

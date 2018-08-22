@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-jshare" version="1.0.0" 
+    xmlns="http://apache.org/cordova/ns/plugins/1.0" 
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>JShare</name>
+
+    <preference name="JPUSH_APPKEY" />
+    <preference name="JPUSH_CHANNEL" value="developer-default" />
+
+    <js-module name="JShare" src="www/JShare.js">
+        <clobbers target="JShare" />
+    </js-module>
+    <!--添加jcore依赖-->
+    <dependency id="cordova-plugin-jcore" />
+
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="JShare">
+                <param name="android-package" value="com.zgwit.jshare.JShare" />
+            </feature>
+            <preference name="JPUSH_APPKEY" value="$JPUSH_APPKEY" />
+            <preference name="JPUSH_CHANNEL" value="$JPUSH_CHANNEL" />
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml" mode="merge">
+        </config-file>
+        <config-file parent="/manifest/application" target="AndroidManifest.xml" mode="overwrite">
+            <!-- JPUSH_CHANNEL JPUSH_APPKEY已经通过build.gradle传入 jshare.jar的AndroidManifest.xml中
+                因为值相同，所以不冲突。以下两个参数可以省略 -->
+            <!-- meta-data android:name="JPUSH_CHANNEL" android:value="$JPUSH_CHANNEL" / -->
+            <!-- meta-data android:name="JPUSH_APPKEY" android:value="$JPUSH_APPKEY" / -->
+        </config-file>
+        <source-file src="src/android/JShare.java" target-dir="src/com/zgwit/jshare" />
+        <!-- 图片下载，转成bitmap后的压缩 -->
+        <source-file src="src/android/Util.java" target-dir="src/com/zgwit/jshare" />
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+    </platform>
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="JShare">
+                <param name="ios-package" value="JShare" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/JShare.m" />
+    </platform>
+</plugin>
