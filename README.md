@@ -1,1 +1,1 @@
-"# cordova-plugin-jshare" 
+# cordova-plugin-jshare
