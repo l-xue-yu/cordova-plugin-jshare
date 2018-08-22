@@ -1,11 +1,19 @@
 {
   "name": "cordova-plugin-jshare",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "share for cordova plugin",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/l-xue-yu/cordova-plugin-jshare.git"
+  },
+  "keywords": [
+    "jshare",
+    "cordova-android"
+  ],
   "author": "",
   "license": "ISC"
 }
