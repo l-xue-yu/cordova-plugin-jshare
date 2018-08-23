@@ -27,7 +27,7 @@ call cordova plugin add cordova-plugin-jshare-twitter --variable  TWITTER_CONSUM
 * 不建议更改插件的安装顺序。
 * JPUSH_APPKEY的值必须有
 ## 使用<br>
-html:<br>
+html（使用了ionic框架）:<br>
 ```html
 <a (click)="testWechat()">测试微信好友网页分享</a><br>
 <a (click)="testWechatMoments()">测试微信朋友圈网页分享</a><br>
