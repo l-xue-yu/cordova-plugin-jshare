@@ -33,6 +33,8 @@ html:<br>
 ```
 ts:<br>
 ```Javascript
+declare var window:any;
+
 testWechat() {
     // 是否安装微信
     window.JShare.isClientValid('Wechat', (res) => {console.log(res + "微信已安装")}, (reason) => { console.log(reason + '微信未安装')
@@ -51,3 +53,17 @@ testWechat() {
       });
   }
 ```
+分享的软件，分享的类型，分享的JSONArray参数，请查看JShare.js。<br>
+## 调用层级关系
+>页面的ts
+>>www目录下JShare.js
+>>>src目录
+>>>>android
+>>>>>JShare.java
+>>>>>Util.java
+## 可能遇到的问题
+1. 微信等软件的开发者账号下的软件ID和KEY没有写对。
+2. 软件没有读写手机存储空间的权限。<br>
+## 其它<br>
+* 图片的分享，默认下载后转bitmap，然后压缩，因为微信的32K图片分享要求。如果你想修改图片下载相关的代码请查看Util.java。
+* 如果遇到不明显的问题，请打包安装到手机后，使用Android studio的logcat来查看具体的错误描述。比如参数出错时，极光会有错误码。当然你也可以自己添加log。
