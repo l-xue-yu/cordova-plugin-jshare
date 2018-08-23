@@ -6,7 +6,7 @@ ___
 微信的好友分享，朋友圈分享，收藏和微博分享在安卓手机上正常分享。<br>
 ## 插件依赖<br>
 ___
-cordova-plugin-jshare插件依赖[极光](https://www.jiguang.cn/)的一个核心插件[cordova-plugin-jcore](https://github.com/jpush/cordova-plugin-jcore)。所以需要先安装cordova-plugin-jcore插件。cordova-plugin-jshare的子插件包括：<br>
+因为cordova-plugin-jshare插件依赖[极光](https://www.jiguang.cn/)的一个核心插件[cordova-plugin-jcore](https://github.com/jpush/cordova-plugin-jcore)。所以需要先安装cordova-plugin-jcore插件。cordova-plugin-jshare的子插件包括：<br>
 1. [cordova-plugin-jshare-wechat](https://github.com/l-xue-yu/cordova-plugin-jshare-wechat)
 2. [cordova-plugin-jshare-qq](https://github.com/l-xue-yu/cordova-plugin-jshare-qq)
 3. [cordova-plugin-jshare-weibo](https://github.com/l-xue-yu/cordova-plugin-jshare-weibo)
@@ -30,6 +30,8 @@ call cordova plugin add cordova-plugin-jshare-twitter --variable  TWITTER_CONSUM
 html:<br>
 ```html
 <a (click)="testWechat()">测试微信好友网页分享</a><br>
+<a (click)="testWechatMoments()">测试微信朋友圈网页分享</a><br>
+<a (click)="testWechatFavorite()">测试微信收藏网页分享</a><br>
 ```
 ts:<br>
 ```Javascript
@@ -39,8 +41,36 @@ testWechat() {
     // 是否安装微信
     window.JShare.isClientValid('Wechat', (res) => {console.log(res + "微信已安装")}, (reason) => { console.log(reason + '微信未安装')
     });
-    //分享
+    //微信好友网页分享
     window.JShare.share('Wechat', 3,
+      {
+        title: "Title", text: "Text", url: "https://www.baidu.com",
+        image_url: "http://www.shijieditu.net/ditu/allimg/170829/1-1FR9235I0501.jpg"
+      },
+      () => {
+        console.log('成功');
+      },
+      (reason) => {
+        console.log(reason + '失败分享');
+      });
+  }
+  //微信朋友圈网页分享
+ testWechatMoments() {
+    window.JShare.share('WechatMoments', 3,
+      {
+        title: "Title", text: "Text", url: "https://www.baidu.com",
+        image_url: "http://www.shijieditu.net/ditu/allimg/170829/1-1FR9235I0501.jpg"
+      },
+      () => {
+        console.log('成功');
+      },
+      (reason) => {
+        console.log(reason + '失败分享');
+      });
+  }
+  //微信收藏网页
+  testWechatFavorite() {
+    window.JShare.share('WechatFavorite', 3,
       {
         title: "Title", text: "Text", url: "https://www.baidu.com",
         image_url: "http://www.shijieditu.net/ditu/allimg/170829/1-1FR9235I0501.jpg"
