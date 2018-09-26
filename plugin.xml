@@ -41,5 +41,8 @@
             </feature>
         </config-file>
         <source-file src="src/ios/JShare.m" />
+        <header-file src="src/ios/JShare.h" />
+        <header-file src="src/ios/JSHAREService.h" />
+        <source-file src="src/ios/libs/jshare-ios-1.6.0.a"  framework = "true"/>
     </platform>
 </plugin>
