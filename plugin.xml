@@ -39,7 +39,7 @@
             <feature name="JShare">
                 <param name="ios-package" value="JShare" />
             </feature>
-            <preference name="JPUSH_APPKEY" value="c47c0dfa0facce8a7efcf175" />
+            <preference name="JPUSH_APPKEY" value="JPUSH_APPKEY" />
             <preference name="JPUSH_CHANNEL" value="developer-default" />
         </config-file>
         <source-file src="src/ios/JShare.m" />
