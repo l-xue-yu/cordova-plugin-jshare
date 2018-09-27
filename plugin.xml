@@ -42,8 +42,10 @@
             <preference name="JPUSH_APPKEY" value="JPUSH_APPKEY" />
             <preference name="JPUSH_CHANNEL" value="developer-default" />
         </config-file>
+        <!-- 主要代码 -->
         <source-file src="src/ios/JShare.m" />
         <header-file src="src/ios/JShare.h" />
+        <!-- JSHARE依赖库和头文件 -->
         <header-file src="src/ios/libs/JSHAREService.h" />
         <source-file src="src/ios/libs/jshare-ios-1.6.0.a"  framework = "true"/>
     </platform>
