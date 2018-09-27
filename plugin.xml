@@ -39,10 +39,12 @@
             <feature name="JShare">
                 <param name="ios-package" value="JShare" />
             </feature>
+            <preference name="JPUSH_APPKEY" value="c47c0dfa0facce8a7efcf175" />
+            <preference name="JPUSH_CHANNEL" value="developer-default" />
         </config-file>
         <source-file src="src/ios/JShare.m" />
         <header-file src="src/ios/JShare.h" />
-        <header-file src="src/ios/JSHAREService.h" />
+        <header-file src="src/ios/libs/JSHAREService.h" />
         <source-file src="src/ios/libs/jshare-ios-1.6.0.a"  framework = "true"/>
     </platform>
 </plugin>
