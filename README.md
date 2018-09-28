@@ -1,9 +1,9 @@
 # cordova-plugin-jshare
 ___
-用于分享的cordova插件，目前只支持安卓。<br>
+用于分享的cordova插件，支持安卓和ios分享。<br>
 ## 功能特性<br>
 ___
-微信的好友分享，朋友圈分享，收藏和微博分享在安卓手机上正常分享。<br>
+微信的好友分享，朋友圈分享，收藏和微博分享在安卓手机和苹果手机正常分享（ios现在只写了web分享，以后应该会添加其它的分享类型。）。<br>
 ## 插件依赖<br>
 ___
 因为cordova-plugin-jshare插件依赖[极光](https://www.jiguang.cn/)的一个核心插件[cordova-plugin-jcore](https://github.com/jpush/cordova-plugin-jcore)。所以需要先安装cordova-plugin-jcore插件。cordova-plugin-jshare的子插件包括：<br>
@@ -90,6 +90,47 @@ testWechat() {
       });
   }
 ```
+
+ios jshare初始化和回调<br>
+程序ionic cordova build ios（编译ios） 后，在AppDelegate.m文件中进行jshare的初始化和回调。
+先在头部引入jshare-ios-1.6.0.a的头文件
+```Object C
+
+#import "JSHAREService.h"
+```
+然后在didFinishLaunchingWithOptions钩子中进行初始化，handleOpenURL进行回调设置
+```Object C
+//初始化
+- (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
+{
+    self.viewController = [[MainViewController alloc] init];
+    //极光分享初始化
+    JSHARELaunchConfig *config = [[JSHARELaunchConfig alloc] init];
+    config.appKey = @"valueappkey";
+    config.SinaWeiboAppKey = @"valueappkey";
+    config.SinaWeiboAppSecret = @"valuesrcret";
+    config.SinaRedirectUri = @"value";
+    config.QQAppId = @"valueappkey";
+    config.QQAppKey = @"valueappkey";
+    config.WeChatAppId = @"valueappkey";
+    config.WeChatAppSecret = @"value";
+    config.FacebookAppID = @"valueappkey";
+    config.FacebookDisplayName = @"valueappkey";
+    config.TwitterConsumerKey = @"valueappkey";
+    config.TwitterConsumerSecret = @"valueappkey";
+    config.JChatProAuth = @"valueappkey";
+    [JSHAREService setupWithConfig:config];
+    [JSHAREService setDebug:YES];
+    
+    return [super application:application didFinishLaunchingWithOptions:launchOptions];
+}
+
+//回调
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    [JSHAREService handleOpenUrl:url];
+    return YES;
+}
+```
 分享的软件，分享的类型，分享的JSONArray参数，请查看JShare.js。<br>
 ## 调用层级关系
 >页面的ts
@@ -98,6 +139,7 @@ testWechat() {
 >>>>android
 >>>>>JShare.java
 >>>>>Util.java
+
 ## 可能遇到的问题
 1. 微信等软件的开发者账号下的软件ID和KEY没有写对。
 2. 软件没有读写手机存储空间的权限。<br>
