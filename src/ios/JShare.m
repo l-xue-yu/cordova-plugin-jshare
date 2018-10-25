@@ -18,7 +18,6 @@ void isClientValid(CDVInvokedUrlCommand * platform);
 + (JSHAREMessage *)prepareWechat:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)platform;
 //设置微博网页分享内容
 + (JSHAREMessage *)prepareWeibo:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)platform;
-<<<<<<< HEAD
 //设置QQ网页分享内容
 + (JSHAREMessage *)prepareQQ:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)platform;
 //设置QQ空间网页分享内容
@@ -27,8 +26,6 @@ void isClientValid(CDVInvokedUrlCommand * platform);
 + (BOOL)isPlatformAuth:(JSHAREPlatform)platform;
 //获取用户信息
 void getUserInfo(CDVInvokedUrlCommand * platform);
-=======
->>>>>>> 998086430edbbd25c87268ad48d89afdb28793c7
 @end
 
 @implementation JShare
@@ -129,17 +126,13 @@ void getUserInfo(CDVInvokedUrlCommand * platform);
                     message=[JShare prepareWechat:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)JSHAREPlatformWechatFavourite];
                     break;
                 case 4:
-<<<<<<< HEAD
                     message=[JShare prepareQQ:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)JSHAREPlatformWechatFavourite];
                     break;
                 case 5:
                     message=[JShare prepareQzone:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)JSHAREPlatformWechatFavourite];
-=======
                     
                     break;
                 case 5:
-                    
->>>>>>> 998086430edbbd25c87268ad48d89afdb28793c7
                     break;
                 case 6:
                     message = [JShare prepareWeibo:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)JSHAREPlatformSinaWeibo];
@@ -209,7 +202,6 @@ void getUserInfo(CDVInvokedUrlCommand * platform);
     
     return message;
 }
-<<<<<<< HEAD
 
 //设置QQ网页分享内容
 + (JSHAREMessage *)prepareQQ:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)platform
@@ -289,6 +281,4 @@ BOOL isOauth = [JSHAREService isPlatformAuth:JSHAREPlatformQQ];
     }];
     [self.commandDelegate sendPluginResult:validResult callbackId:platform.callbackId];
 }
-=======
->>>>>>> 998086430edbbd25c87268ad48d89afdb28793c7
 @end

@@ -1,9 +1,16 @@
 # cordova-plugin-jshare
 ___
+<<<<<<< HEAD
+用于分享的cordova插件，目前只支持安卓。<br>
+## 功能特性<br>
+___
+微信的好友分享，朋友圈分享，收藏，微博分享和微信登录。<br>
+=======
 用于分享的cordova插件，支持安卓和ios分享。<br>
 ## 功能特性<br>
 ___
 微信的好友分享，朋友圈分享，收藏和微博分享在安卓手机和苹果手机正常分享（ios现在只写了web分享，以后应该会添加其它的分享类型。）。<br>
+>>>>>>> 998086430edbbd25c87268ad48d89afdb28793c7
 ## 插件依赖<br>
 ___
 因为cordova-plugin-jshare插件依赖[极光](https://www.jiguang.cn/)的一个核心插件[cordova-plugin-jcore](https://github.com/jpush/cordova-plugin-jcore)。所以需要先安装cordova-plugin-jcore插件。cordova-plugin-jshare的子插件包括：<br>
@@ -41,6 +48,7 @@ html（使用了ionic框架）:<br>
 ```
 ts:<br>
 ```Javascript
+//分享开始
 //全局变量window
 declare var window:any;
 
@@ -89,6 +97,13 @@ testWechat() {
         console.log(reason + '失败分享');
       });
   }
+//分享结束
+```
+在AppDelegate.m中进行初始化和设置回调，微信回调必须有Appsecript
+
+```Object c
+//微信登录，初始化和回调开始
+@implementation AppDelegate
 ```
 
 ios jshare初始化和回调<br>
@@ -125,11 +140,55 @@ ios jshare初始化和回调<br>
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
+//回调低版本
 //回调
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
     [JSHAREService handleOpenUrl:url];
     return YES;
 }
+
+//回调高版本
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(nonnull NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+    [JSHAREService handleOpenUrl:url];
+    return YES;
+}
+@end
+//微信登录，初始化和回调结束
+```
+```Javscript
+//牵扯到js的回调嵌套，希望提出问题，给更好的方法来调用。
+weixin_authorie(cb) {
+    if (this.platform.is('android')) {
+      window.JShare.isAuthorize('Wechat', ()=>cb(), err => {
+        window.JShare.authorize('Wechat', ()=>cb(), err => cb(err));
+      });
+    } else if (this.platform.is('ios')) {
+      cb();
+    } else {
+      //error
+      cb('未支持的平台');
+    }
+  }
+
+  //微信登录
+  login_weixin() {
+    this.weixin_authorie(err => {
+      if (err) {
+        this.common.createAlert('授权失败', err).present();
+        return;
+      }
+      window.JShare.getUserInfo('Wechat', (userinfo) => {
+        //获取微信用户数据成功
+        console.log(userinfo);
+        this.weixin_auth = this.platform.is('android') ? JSON.parse(userinfo) : userinfo;
+
+      }, (error) => {
+        alert("获取用户信息错误", error).present();
+      });
+
+    });
+  }
+
 ```
 分享的软件，分享的类型，分享的JSONArray参数，请查看JShare.js。<br>
 ## 调用层级关系
@@ -139,7 +198,6 @@ ios jshare初始化和回调<br>
 >>>>android
 >>>>>JShare.java
 >>>>>Util.java
-
 ## 可能遇到的问题
 1. 微信等软件的开发者账号下的软件ID和KEY没有写对。
 2. 软件没有读写手机存储空间的权限。<br>
