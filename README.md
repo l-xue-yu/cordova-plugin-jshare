@@ -1,6 +1,5 @@
 # cordova-plugin-jshare
 ___
-<<<<<<< HEAD
 用于分享的cordova插件，目前只支持安卓。<br>
 ## 功能特性<br>
 ___
@@ -10,7 +9,6 @@ ___
 ## 功能特性<br>
 ___
 微信的好友分享，朋友圈分享，收藏和微博分享在安卓手机和苹果手机正常分享（ios现在只写了web分享，以后应该会添加其它的分享类型。）。<br>
->>>>>>> 998086430edbbd25c87268ad48d89afdb28793c7
 ## 插件依赖<br>
 ___
 因为cordova-plugin-jshare插件依赖[极光](https://www.jiguang.cn/)的一个核心插件[cordova-plugin-jcore](https://github.com/jpush/cordova-plugin-jcore)。所以需要先安装cordova-plugin-jcore插件。cordova-plugin-jshare的子插件包括：<br>
