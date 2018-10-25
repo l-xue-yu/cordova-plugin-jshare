@@ -18,6 +18,17 @@ void isClientValid(CDVInvokedUrlCommand * platform);
 + (JSHAREMessage *)prepareWechat:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)platform;
 //设置微博网页分享内容
 + (JSHAREMessage *)prepareWeibo:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)platform;
+<<<<<<< HEAD
+//设置QQ网页分享内容
++ (JSHAREMessage *)prepareQQ:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)platform;
+//设置QQ空间网页分享内容
++ (JSHAREMessage *)prepareQzone:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)platform;
+//检查授权信息是否过期
++ (BOOL)isPlatformAuth:(JSHAREPlatform)platform;
+//获取用户信息
+void getUserInfo(CDVInvokedUrlCommand * platform);
+=======
+>>>>>>> 998086430edbbd25c87268ad48d89afdb28793c7
 @end
 
 @implementation JShare
@@ -118,10 +129,17 @@ void isClientValid(CDVInvokedUrlCommand * platform);
                     message=[JShare prepareWechat:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)JSHAREPlatformWechatFavourite];
                     break;
                 case 4:
+<<<<<<< HEAD
+                    message=[JShare prepareQQ:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)JSHAREPlatformWechatFavourite];
+                    break;
+                case 5:
+                    message=[JShare prepareQzone:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)JSHAREPlatformWechatFavourite];
+=======
                     
                     break;
                 case 5:
                     
+>>>>>>> 998086430edbbd25c87268ad48d89afdb28793c7
                     break;
                 case 6:
                     message = [JShare prepareWeibo:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)JSHAREPlatformSinaWeibo];
@@ -191,4 +209,86 @@ void isClientValid(CDVInvokedUrlCommand * platform);
     
     return message;
 }
+<<<<<<< HEAD
+
+//设置QQ网页分享内容
++ (JSHAREMessage *)prepareQQ:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)platform
+{
+    
+    JSHAREMessage *message = [JSHAREMessage message];
+    switch (type) {
+        case JSHARELink:
+        {
+            message.mediaType = JSHARELink;
+            message.url=[parmDic objectForKey:@"url"];
+            message.text = [parmDic objectForKey:@"text"];
+            message.title = [parmDic objectForKey:@"title"];
+            message.platform = platform;
+            NSString *imageURL = [parmDic objectForKey:@"image_url"];
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
+            message.image = imageData;
+            break;
+        }
+        default:
+            break;
+    }
+    
+    return message;
+}
+//设置QQ网页分享内容
++ (JSHAREMessage *)prepareQzone:(NSMutableDictionary *)parmDic num2:(int)type num3:(NSUInteger)platform
+{
+    
+    JSHAREMessage *message = [JSHAREMessage message];
+    switch (type) {
+        case JSHARELink:
+        {
+            message.mediaType = JSHARELink;
+            message.url=[parmDic objectForKey:@"url"];
+            message.text = [parmDic objectForKey:@"text"];
+            message.title = [parmDic objectForKey:@"title"];
+            message.platform = platform;
+            NSString *imageURL = [parmDic objectForKey:@"image_url"];
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
+            message.image = imageData;
+            break;
+        }
+        default:
+            break;
+    }
+    
+    return message;
+}
+BOOL isOauth = [JSHAREService isPlatformAuth:JSHAREPlatformQQ];
+//获取用户信息
+
+- (void) getUserInfo:(CDVInvokedUrlCommand *)platform
+{
+    //获取软件名称
+    NSArray *arguments=platform.arguments;
+    NSString *platformName=arguments[0];
+    //返回信息
+    __block CDVPluginResult* validResult=nil;
+    
+    [JSHAREService getSocialUserInfo:platformName handler:^(JSHARESocialUserInfo *userInfo, NSError *error) {
+        NSString *alertMessage;
+        NSString *title;
+        if (error) {
+            validResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"失败，无法获取用户信息"];
+        }else{
+            title = userInfo.name;
+            alertMessage = [NSString stringWithFormat:@"昵称: %@\n 头像链接: %@\n 性别: %@\n",userInfo.name,userInfo.iconurl,userInfo.gender == 1? @"男" : @"女"];
+            validResult=[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:alertMessage];
+        }
+        UIAlertView *Alert = [[UIAlertView alloc] initWithTitle:title message:alertMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [Alert show];
+        });
+        
+        
+    }];
+    [self.commandDelegate sendPluginResult:validResult callbackId:platform.callbackId];
+}
+=======
+>>>>>>> 998086430edbbd25c87268ad48d89afdb28793c7
 @end
